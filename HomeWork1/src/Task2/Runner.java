@@ -14,45 +14,41 @@ import java.sql.SQLOutput;
  */
 public class Runner {
     public static void main(String[] args) {
+
+        //  создание автомобилей разного вида
         Car audi = new Audi("audi", "model", 123, "red", 300);
         Car audi2 = new Audi("audi", "model", 123, "red", 3);
         Car bmw = new Bmw("audi", "model", 123, "red", 300);
         Car ford = new Ford("ford", "model", 123, "red", 300);
         Car honda = new Honda("honda", "model", 123, "red", 300);
 
-        // первая машина поехала на парковку
-        Garage.addCar(audi);
-        Garage.cars.forEach((key,value)->{System.out.print(key + "=" + value + " ");}  );
-        System.out.println();
+        Garage garage = Garage.getInstance();
 
-        Garage.addCar(audi);
-        Garage.cars.forEach((key,value)->{System.out.print(key + "=" + value + " ");}  );
-        System.out.println();
+        // на парковку въехали 3 одинаковые audi, 1 - audi2, 1 - bmw, 1 - ford, 2 - honda
+        garage.addCar(audi);
+        garage.addCar(audi);
+        garage.addCar(audi);
+        garage.addCar(audi2);
+        garage.addCar(bmw);
+        garage.addCar(ford);
+        garage.addCar(honda);
+        garage.addCar(honda);
 
-        Garage.addCar(audi);
-        Garage.addCar(audi2);
-        Garage.addCar(bmw);
-        Garage.addCar(ford);
-        Garage.addCar(honda);
-        Garage.addCar(honda);
+        System.out.println("Состояние машин в гараже:");
+        garage.getCars().forEach((key,value)->{System.out.println(" ".repeat(10)+key + "=" + value + " ");}  );
 
+        //количество машин одинаковых машин
+        System.out.println("Машин вида audi - "+garage.countThisCar(audi));
 
+        // машины выезжают 1 - audi, 1 - ford, 1 - honda
+        garage.removeCar(honda);
+        garage.removeCar(ford);
+        garage.removeCar(audi);
+        System.out.println("Состояние машин в гараже:");
+        garage.getCars().forEach((key,value)->{System.out.println(" ".repeat(10)+key + "=" + value + " ");}  );
 
-        Garage.cars.forEach((key,value)->{System.out.print(key + "=" + value + " ");}  );
-        System.out.println();
-
-        System.out.println(Garage.countThisCar(audi));
-
-        Garage.removeCar(honda);
-        Garage.cars.forEach((key,value)->{System.out.print(key + "=" + value + " ");}  );
-        System.out.println();
-
-        Garage.removeCar(honda);
-        Garage.cars.forEach((key,value)->{System.out.print(key + "=" + value + " ");}  );
-        System.out.println();
-        Garage.removeCar(honda);
-        Garage.cars.forEach((key,value)->{System.out.print(key + "=" + value + " ");}  );
-        System.out.println();
-
+        System.out.println("Количество автомобилей вида audi - "+garage.countTypeCar(audi));
+        System.out.println("Количество автомобилей вида ford - "+garage.countTypeCar(ford));
+        System.out.println("Количество автомобилей вида bmw - "+garage.countTypeCar(bmw));
     }
 }

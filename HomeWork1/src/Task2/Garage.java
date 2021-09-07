@@ -10,33 +10,59 @@ import java.util.Map;
 Добавить в класс Garage методы для парковки, выезда авто, а также для получения количества определенного вида автомобилей.
  */
 public class Garage {
-    public static Map<Car, Integer> cars = new HashMap<>();
 
-    public static Integer addCar(Car car) {
-        System.out.println(car.toString()+"  заехала на парковку");
+    private Garage() {
+    }
+
+    private final static Garage instance = new Garage();
+
+    private final Map<Car, Integer> cars = new HashMap<>();
+
+    public static Garage getInstance() {
+        return instance;
+    }
+
+    public Map<Car, Integer> getCars() {
+        return cars;
+    }
+
+    // метод добавления машины на парковку
+    public Integer addCar(Car car) {
+        System.out.println(car.toString() + "  припоркавалась");
         return cars.merge(car, 1, (a, b) -> cars.get(car) + 1);
     }
 
-    public static Integer removeCar(Car car) {
+    // метод выезда машины с парковку
+    public Integer removeCar(Car car) {
         Integer count;
         if (cars.containsKey(car)) {
             count = cars.get(car) - 1;
             if (count == 0) {
-                System.out.println("последняя машина данного вида покинула гараж");
+                System.out.println("Последняя машина вида " + car.toString() + " покинула гараж");
                 return cars.remove(car);
             } else {
-                System.out.println("Одна машина вида " + car.toString() + " выехала");
+                System.out.println("Машина вида " + car.toString() + " выехала из гаража");
                 return cars.put(car, count);
             }
         } else {
-            System.out.println(car.toString()+ " машины такого вида не было в гараже");
+            System.out.println(car.toString() + "- машина такого вида не было в гараже");
             return -1;
         }
     }
 
-    public static Integer countThisCar(Car car) {
+    // метод для получения количества определенного одинаковых автомобилей
+    public Integer countThisCar(Car car) {
         return cars.get(car);
     }
 
-
+    // метод для получения количества определенного вида автомобилей
+    public Integer countTypeCar(Car car) {
+        int count = 0;
+        for (Map.Entry<Car, Integer> carIntegerEntry : cars.entrySet()) {
+            if (car.getClass().equals(carIntegerEntry.getKey().getClass())) {
+                count = count + carIntegerEntry.getValue();
+            }
+        }
+        return count;
+    }
 }

@@ -6,32 +6,34 @@ package Task1;
 Слова, отличающиеся регистром букв, считать различными.
  */
 
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 
 public class Runner {
 
-    private static String FILE_NAME = "text.txt";
+    private static String FILE_NAME = "text.txt"; // файл с текстом
 
     public static void main(String[] args) throws IOException {
-        String collect = Files.lines(Paths.get("HomeWork1/src/Task1/text.txt")).collect(Collectors.joining());
-        System.out.println(collect);
-        String[] array = collect.split("[^a-zA-Z]+");
-        Map<String,Integer> map= new HashMap<>();
-        for (String s : array) {
-            map.merge(s, 1, (a, b) -> map.get(s) + 1);
-        }
 
-        map.forEach( (a, b) -> System.out.println(a+":" +b));
+        String path = CreatePath.getPath("HomeWork1", Runner.class) + FILE_NAME;  //путь к файлу
+        Map<String, Integer> map = new TreeMap<>();
 
+        String[] array = Files.lines(Paths.get(path))     //массив слов, 111- не слово, B1 - слово
+                .collect(Collectors.joining(" "))
+                .replaceAll("[^a-zA-Z]\\d+[^a-zA-Z]", " ")
+                .split("[^a-zA-Z0-9’']+");
 
+        Arrays.stream(array).forEach(s -> map.merge(s, 1, (a, b) -> map.get(s) + 1));  //считаем слова
+
+        map.forEach((a, b) -> System.out.println(a + " - встретилось раз - " + b)); // выводим результат
     }
-    }
+}
 
 
 
