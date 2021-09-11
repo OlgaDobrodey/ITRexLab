@@ -1,0 +1,6 @@
+Time and Date:  2021-09-11 22:09 List is contained even element List: [9, 4, 4] Value: 4
+Time and Date:  2021-09-11 22:09 List is contained even element List: [4, 5, 4] Value: 4
+Time and Date:  2021-09-11 22:09 List is contained even element List: [8, 8, 5] Value: 8
+Time and Date:  2021-09-11 22:09 List is contained even element List: [3, 6, 9] Value: 6
+Time and Date:  2021-09-11 22:09 List is contained even element List: [9, 1, 4] Value: 4
+Time and Date:  2021-09-11 22:09 List is contained even element List: [8, 6, 7] Value: 8
