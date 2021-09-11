@@ -16,13 +16,12 @@ public class Main {
                if(Validator.validatorList(list)){break;}
             } catch (EvenNumberException ex) {
                 Logger.getLogger().log(ex.getMessage(),ex.getList(),ex.getValue());
-                System.out.println(ex.getMessage() +" List: "+ ex.getList() +" Value: " + ex.getValue());
                 list = generator.generateRandomList(3);
 
             }
         }
-        System.out.println("THE END");
-        System.out.println(list);
+        System.out.println("The result:");
+        System.out.println("list: "+list);
 
     }
 }
