@@ -21,4 +21,9 @@ class Task4Test {
         assertEquals(Task4.factorial(3L), 6L);
     }
 
+    @Test
+    void factorialTestForNegativNumberTest() {
+        assertEquals(Task4.factorial(-3L), -1);
+    }
+
 }

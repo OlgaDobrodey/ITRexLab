@@ -39,8 +39,9 @@ public class Task4 {
      * @return factorial value
      */
     public static long factorial(long n) {
-        return LongStream.rangeClosed( 1, n )
-                .reduce(1, ( long a, long b ) -> a * b);
+        return n >= 0?LongStream.rangeClosed( 1, n )
+                .reduce(1, ( long a, long b ) -> a * b)
+                :-1;
     }
 
 }
