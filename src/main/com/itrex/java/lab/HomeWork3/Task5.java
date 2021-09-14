@@ -37,6 +37,8 @@ public class Task5 {
      * @return sum of odd numbers
      */
     public static long sumOfOddNumbersInRange(long start, long end) {
-        return LongStream.rangeClosed( start, end ).filter((x)->x%2==1).sum();
+        return (start >=0 && end >= start)?
+                LongStream.rangeClosed( start, end ).filter((x)->x%2==1).sum()
+                : -1;
     }
 }

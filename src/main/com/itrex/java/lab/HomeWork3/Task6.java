@@ -50,10 +50,11 @@ import java.util.List;
 public class Task6 {
 
     public static long calcNumberOfEmployees(List<Department> departments, long threshold) {
-        long count = departments.stream().filter(department -> department.getCode().startsWith("111-"))
-                .flatMap(department -> department.getEmployees().stream())
-                .filter(employees -> employees.getSalary()>=threshold).count();
-        return count;
+                return (departments!=null && threshold>=0)?
+                departments.stream().filter(department -> department.getCode().startsWith("111-"))
+                        .flatMap(department -> department.getEmployees().stream())
+                        .filter(employees -> employees.getSalary()>=threshold).count()
+                        : -1;
     }
 }
 

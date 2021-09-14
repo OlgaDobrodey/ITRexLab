@@ -25,6 +25,9 @@ import java.util.stream.IntStream;
 public class Task3 {
 
     public static IntStream createFilteringStream(IntStream evenStream, IntStream oddStream) {
-        return IntStream.concat(evenStream, oddStream).filter((x)-> x%3==0 && x%5==0).sorted().skip(2);
+        return (evenStream != null && oddStream != null) ?
+                IntStream.concat(evenStream, oddStream).filter((x) -> x % 3 == 0 && x % 5 == 0).sorted().skip(2):
+                IntStream.of();
     }
+
 }

@@ -59,10 +59,12 @@ public class Task7 {
      * Calculates the general sum of canceled transactions for all non empty accounts in the list
      */
     public static long calcSumOfCanceledTransOnNonEmptyAccounts(List<Account> accounts) {
-        return accounts.stream().filter(account -> account.getBalance() != 0)
+        return accounts!=null?
+                accounts.stream().filter(account -> account.getBalance() != 0)
                 .flatMap(account -> account.getTransactions().stream())
                 .filter(transaction -> transaction.getState().equals(State.CANCELED))
-                .map(transaction -> transaction.getSum()).reduce((a,b)->a+b).orElse(0L);
+                .map(transaction -> transaction.getSum()).reduce((a,b)->a+b).orElse(0L)
+                :-1;
     }
 }
 

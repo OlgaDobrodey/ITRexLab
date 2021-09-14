@@ -18,6 +18,11 @@ import java.util.stream.Stream;
 public class Task2 {
 
     public static Stream<String> createBadWordsDetectingStream(String text, List<String> badWords) {
-        return Arrays.stream(text.split("[^a-zA-z0-9]+")).filter(word-> badWords.contains(word)).distinct().sorted();
+        if (text != null && badWords != null) {
+            return Arrays.stream(text.split("[^a-zA-z0-9]+"))
+                    .filter(word -> badWords.contains(word)).distinct().sorted();
+        } else return Stream.of();
     }
+
 }
+

@@ -2,13 +2,19 @@ package main.com.itrex.java.lab.HomeWork3;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class Task1Test {
+class Task1Test {
 
     @Test
-    public void isPrimeTrueTest(){
+    void isPrimeTrueTest() {
         assertTrue(Task1.isPrime(2));
+    }
+
+    @Test
+    void isPrimeFalseTest() {
+        assertFalse(Task1.isPrime(4));
     }
 
 }
