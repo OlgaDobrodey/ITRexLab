@@ -1,7 +1,7 @@
-.idea
-target
-out/
-*.iml
+build/
+!/src/main/
+!/src/test/
+
 # Compiled class file
 *.class
 
@@ -11,8 +11,13 @@ out/
 # BlueJ files
 *.ctxt
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+target
 
 # Package Files #
 *.jar
@@ -37,3 +42,4 @@ build/
 
 ### VS Code ###
 .vscode/
+

@@ -1,0 +1,2 @@
+Time and Date:  2021-09-14 11:12 java.lang.OutOfMemoryError:Compressed class space
+Time and Date:  2021-09-14 11:17 java.lang.OutOfMemoryError:Compressed class space
