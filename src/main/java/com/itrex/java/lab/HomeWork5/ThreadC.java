@@ -1,5 +1,8 @@
 package com.itrex.java.lab.HomeWork5;
 
+/*
+Thread C: calls landrover() that should output the word "LandRover".
+ */
 public class ThreadC extends Thread {
 
     private final LandRover rover;

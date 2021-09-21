@@ -1,5 +1,8 @@
 package com.itrex.java.lab.HomeWork5;
 
+/*
+Thread A: calls land() that should output the word "Land"
+ */
 public class ThreadA extends Thread {
 
     private final LandRover rover;

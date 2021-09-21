@@ -6,11 +6,10 @@ public class LandRover extends TaskConcurrency {
 
     private volatile int count;
     private final int n;
-    public final static Integer monitor = 0;
-    private final static Integer monitor2 = 0;
+    private final static Integer monitor = 0;
 
     public LandRover(int n) {
-        super(n);
+        super(n);                       //1 <= n <= 50
         if (n < 1 || n > 50) {
             throw new IllegalArgumentException("invalid t value n");
         }
@@ -66,12 +65,7 @@ public class LandRover extends TaskConcurrency {
         }
     }
 
-    public int getCount() {
-        synchronized (monitor2) {
-            return count;
-        }
-    }
-
+    //method set count and if count = n stops threads
     private void setCount(int count) {
         if ((count + 1) > n) {
             Flag.getFlagFalse();
@@ -79,6 +73,7 @@ public class LandRover extends TaskConcurrency {
         } else this.count = count + 1;
     }
 
+    //method correct print to view ["land",2,3]
     private void printСorrect(int count) {
         if ((count + 1) > n) {
             System.out.println("]");

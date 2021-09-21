@@ -1,5 +1,8 @@
 package com.itrex.java.lab.HomeWork5;
 
+/*
+Thread B: calls rover() that should output the word "Rover".
+ */
 public class ThreadB extends Thread {
 
     private LandRover rover;
