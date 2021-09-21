@@ -14,8 +14,8 @@ public class Task4 {
 
     public static void main(String[] args) {
         List<Integer> numbers = Arrays.asList(0, 1, 2, 3);
-        long val = numbers.stream().
-                collect(Collectors.reducing(1, (a, b) -> a * b * b));//write collector
+        long val = numbers.stream()
+                .collect(Collectors.reducing(1, (a, b) -> a * b * b));//write collector
         System.out.println(val);//result 0
     }
 }

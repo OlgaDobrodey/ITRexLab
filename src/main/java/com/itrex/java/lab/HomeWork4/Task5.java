@@ -19,21 +19,20 @@ import java.util.stream.Collectors;
  * <p>
  * Important. You should write only the collector in any valid formats but without ; on the end.
  * It will be passed as an ﻿argument to the collect() method of a stream as shown below.
- *
- *
-
- Sample Input 1:
- aaaa aaa a aa
-
- Sample Output 1:
- {false=[], true=[aaaa, aaa, a, aa]}
-
- Sample Input 2:
- level bbaa ac
-
- Sample Output 2:
- {false=[bbaa, ac], true=[level]}
-
+ * <p>
+ * <p>
+ * <p>
+ * Sample Input 1:
+ * aaaa aaa a aa
+ * <p>
+ * Sample Output 1:
+ * {false=[], true=[aaaa, aaa, a, aa]}
+ * <p>
+ * Sample Input 2:
+ * level bbaa ac
+ * <p>
+ * Sample Output 2:
+ * {false=[bbaa, ac], true=[level]}
  */
 public class Task5 {
 
@@ -41,13 +40,12 @@ public class Task5 {
         String[] words = {"aaaa", "aaa", "a", "aa"};
         String[] words2 = {"level", "bbaa", "a", "ac"};
 
-
-       Map<Boolean, List<String>> palindromeOrNoMap = Arrays.stream(words)
-        .collect(Collectors.partitioningBy(
-                word-> word.equals(new StringBuilder(word).reverse().toString())));
+        Map<Boolean, List<String>> palindromeOrNoMap = Arrays.stream(words)
+                .collect(Collectors.partitioningBy(
+                        word -> word.equals(new StringBuilder(word).reverse().toString())));
         System.out.println(palindromeOrNoMap);
         System.out.println(Arrays.stream(words2)
                 .collect(Collectors.partitioningBy(
-                        word-> word.equals(new StringBuilder(word).reverse().toString()))));
+                        word -> word.equals(new StringBuilder(word).reverse().toString()))));
     }
 }

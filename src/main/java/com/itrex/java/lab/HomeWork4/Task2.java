@@ -25,8 +25,8 @@ public class Task2 {
 
     public static void main(String[] args) {
         IntPredicate predicate1 = x -> x!=2;
-        IntPredicate predicate2 = x -> x!=4;
-        IntPredicate predicate3 = x -> x!=5;
+        IntPredicate predicate2 = x -> x<4;
+        IntPredicate predicate3 = x -> x>5;
         List<IntPredicate> list = new ArrayList<>();
         System.out.println(list.isEmpty());
         System.out.println(disjunctAll(List.of(predicate1,predicate2,predicate3)).test(2));
