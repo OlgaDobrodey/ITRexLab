@@ -21,7 +21,6 @@ public class Main {
         threadD.join();
 
         System.out.println("Count ="+(rover.getCount()-1));
-
     }
 
 }

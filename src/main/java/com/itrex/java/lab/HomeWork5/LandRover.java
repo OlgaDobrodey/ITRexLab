@@ -4,7 +4,6 @@ import java.util.function.IntConsumer;
 
 public class LandRover extends TaskConcurrency {
 
-
     private volatile int count;
     private final int n;
     public final static Integer monitor = 0;

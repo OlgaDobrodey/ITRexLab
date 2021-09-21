@@ -2,7 +2,7 @@ package com.itrex.java.lab.HomeWork5;
 
 public class ThreadA extends Thread {
 
-    private LandRover rover;
+    private final LandRover rover;
 
     public ThreadA(LandRover rover) {
         this.rover = rover;
@@ -21,7 +21,6 @@ public class ThreadA extends Thread {
                 } else break;
             }
         }
-
     }
 }
 
