@@ -10,16 +10,11 @@ public class ThreadB extends Thread {
 
     @Override
     public void run() {
-
-        while (true) {
-            synchronized (LandRover.monitor) {
-                if (rover.getCount() <= rover.getN()) {
-                    try {
-                        rover.rover(() -> System.out.println("Rover"));
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }else break;
+        while (Flag.flag) {
+            try {
+                rover.rover(() -> System.out.print("Rover"));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }
