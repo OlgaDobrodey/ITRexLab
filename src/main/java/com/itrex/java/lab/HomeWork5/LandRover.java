@@ -61,7 +61,6 @@ public class LandRover extends TaskConcurrency {
                         if(count==1) System.out.print("[");
                         printNumber.accept(count);
                     }
-
                     printСorrect(count);
                     count++;
                     notifyAll();
