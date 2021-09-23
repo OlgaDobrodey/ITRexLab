@@ -1,100 +1,75 @@
 package com.itrex.java.lab.HomeWork5;
 
-import java.util.concurrent.Semaphore;
 import java.util.function.IntConsumer;
+import java.util.function.IntPredicate;
 
-public class LandRover implements Runnable {
+public class LandRover extends TaskConcurrency {
 
-    private volatile int count;
+    private int count;
     private final int n;
-    private Semaphore semaphore = new Semaphore(1);
 
-    private Runnable printLand = () -> System.out.print("Land");
-    private Runnable printRover = () -> System.out.print("Rover");
-    private Runnable printLandRover = () -> System.out.print("LandRover");
-    private IntConsumer printNumber = value -> System.out.print(value);
-
-    public LandRover(int n) {   //1 <= n <= 50
+    public LandRover(int n) {
+        super(n);                       //1 <= n <= 50
         if (n < 1 || n > 50) {
             throw new IllegalArgumentException("invalid t value n");
         }
         this.n = n;
         this.count = 1;
+        ;
     }
 
-    static {
-        System.out.print("[");
-    }
-
+    @Override
     public void land(Runnable printLand) throws InterruptedException {
-        synchronized (this) {
-            if (count <= n && count % 3 == 0 && count % 5 != 0) {
-                printLand.run();
-                printСorrect(count);
-                count++;
-            }
-        }
+        IntPredicate predicate = (count -> count % 3 == 0 && count % 5 != 0);
+        processCall(predicate, printLand, null);
     }
 
+    @Override
     public void rover(Runnable printRover) throws InterruptedException {
-        synchronized (this) {
-            if (count <= n && count % 3 != 0 && count % 5 == 0) {
-                printRover.run();
-                printСorrect(count);
-                count++;
-            }
-        }
+        IntPredicate predicate = (count -> count % 3 != 0 && count % 5 == 0);
+        processCall(predicate, printRover, null);
     }
 
+    @Override
     public void landrover(Runnable printLandRover) throws InterruptedException {
-        synchronized (this) {
-            if (count <= n && count % 3 == 0 && count % 5 == 0) {
-                printLandRover.run();
-                printСorrect(count);
-                count++;
-            }
-        }
+        IntPredicate predicate = (count -> count % 3 == 0 && count % 5 == 0);
+        processCall(predicate, printLandRover, null);
     }
 
+    @Override
     public void number(IntConsumer printNumber) throws InterruptedException {
-        synchronized (this) {
-            if (count <= n && count % 3 != 0 && count % 5 != 0) {
-                printNumber.accept(count);
-                printСorrect(count);
-                count++;
-            }
-        }
+        IntPredicate predicate = (count -> count % 3 != 0 && count % 5 != 0);
+        processCall(predicate, null, printNumber);
     }
 
     //method correct print to view ["land",2,3]
     private void printСorrect(int count) {
-        if (count == n) {
+        if ((count + 1) > n) {
             System.out.println("]");
         } else {
             System.out.print(",");
         }
     }
 
-    @Override
-    public void run() {
-        while (count <= n) {
-            try {
-                semaphore.acquire();
-                if (Thread.currentThread().getName().equals("thread-a")) {
-                    land(printLand);
-                } else if (Thread.currentThread().getName().equals("thread-b")) {
-                    rover(printRover);
-                } else if (Thread.currentThread().getName().equals("thread-c")) {
-                    landrover(printLandRover);
+    private void processCall(IntPredicate predicate, Runnable print, IntConsumer printNumber) throws InterruptedException {
+        synchronized (this) {
+            while (count <= n) {
+                if (predicate.test(count)) {
+                    if (print != null) {
+                        print.run();
+                    } else {
+                        if(count==1) System.out.print("[");
+                        printNumber.accept(count);
+                    }
+
+                    printСorrect(count);
+                    count++;
+                    notifyAll();
                 } else {
-                    number(printNumber);
+                    wait();
                 }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } finally {
-                semaphore.release();
             }
         }
     }
-}
 
+}
